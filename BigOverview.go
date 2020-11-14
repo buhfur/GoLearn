@@ -62,7 +62,50 @@ func StringFormatting(){
 		// use %d for formatting a decimal and not %i
 		fmt.Printf(" Users fist, last name, and age : %s\n %s\n %d\n",firstName,lastName,age)
 	}
+func SwitchCases(){
+	yourAge := 18
+	
+	switch yourAge {
+		case 16: fmt.Println("go drive")
+		
+		case 18: fmt.Println("go vote")
+		case 21: fmt.Println("go drink alcohol")
+		default : fmt.Println("go have fun") 
+	}	
 
+}
+
+
+
+func Arrays(){
+	var favNums2[5] float64
+	favNums2[0] = 263
+	favNums2[1] = 363
+	favNums2[2] = 463
+	favNums2[3] = 563
+	
+	fmt.Println(favNums2[3])
+	
+	//can also initialize an array like this
+
+	//create arrray without specified length
+	randArray := []int {6,7,8,9,10,11}
+	
+	for key,value := range randArray{
+		fmt.Println("random array : " ,key,value)
+	// count from 1 instead of zero when creating array in brackets
+	}
+	favNums3 := [5]int {1,2,3,4,5}
+
+	favStrings := [5]string{"ryan","bob","joe","lisa","bart"}
+	for key,value := range favNums3	{
+		fmt.Println(key,value)
+	}
+	//array of strings
+	for key,value := range favStrings{
+		fmt.Println(key,string(value))
+	}
+}
 
 func main(){
 	//can make constant varibles with the const keyword
@@ -89,7 +132,28 @@ func main(){
 
 	fmt.Println(useradd)
 	fmt.Println(split(17))
-	fmt.Println(secondsplit("john"))
 	ConsAndLoops()
 	StringFormatting()
+	Arrays()
+	SwitchCases()
+	afterMain()
+	makingMaps()
+
 }
+//can declare functions after the main function
+
+func afterMain(){
+	fmt.Println("this is after the main function")
+
+}
+func makingMaps(){
+	//function about maps in go (or dictionaries as i call them)
+	presAge := make(map[string] int)
+	presAge["George Washington"] = 64
+	// easilly print out the length of an array 
+	fmt.Println(len(presAge))
+	fmt.Println(presAge["George Washington"])
+
+	fmt.Println(presAge)
+}
+
