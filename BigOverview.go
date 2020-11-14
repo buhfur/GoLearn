@@ -1,11 +1,12 @@
 package main
+//Ryan McVicker
 //when using 3rd party packages remember to make a go.mod file with : go mod init "main.go"
 //fmt is a format package
 import (
 	"fmt"
-	"math/rand"
-	"math"
-	"rsc.io/quote"
+	//"math/rand"
+	//"math"
+	//"rsc.io/quote"
 )
 //can make list of variables with var keyword
 
@@ -96,6 +97,8 @@ func Arrays(){
 	// count from 1 instead of zero when creating array in brackets
 	}
 	favNums3 := [5]int {1,2,3,4,5}
+	//call AddUp on array here
+	fmt.Println("sum of array is : ",AddUp(randArray))
 
 	favStrings := [5]string{"ryan","bob","joe","lisa","bart"}
 	for key,value := range favNums3	{
@@ -108,44 +111,46 @@ func Arrays(){
 }
 
 func main(){
-	//can make constant varibles with the const keyword
-	const pi float64 = 3.14159265 
-	fmt.Println(quote.Go())
-	//variables
-	var x,y int = 3, 4
-	var f float64 = math.Sqrt(float64(x*x + y*y))
+	//initialize variables here
+	//const pi float64 = 3.14159265 
 
-	var z uint = uint(f)//convert f to unsigned int
+	//var x,y int = 3, 4
 
-	//unsigned int cannot be negative
+	//var f float64 = math.Sqrt(float64(x*x + y*y))
 
-	//signed ints can be negative but has a lower positve range
+	//var z uint = uint(f)//convert f to unsigned int
 
-	fmt.Println(x, y, z)
-	fmt.Println("my favorite number is : ", rand.Intn(10))
+	num1, num2 := addTwoValues(5)
 
-	//name is exported if it begins with a capital letter
+	//make closures to access variables in main in another function
+	num3 := 3
 
-	fmt.Println(math.Pi)
+	doubleNum := func() int {
+		num3 *= 2
 
-	var useradd = add(3, 5)//saving function out put to variable
+		return num3
+	}
 
-	fmt.Println(useradd)
-	fmt.Println(split(17))
-	ConsAndLoops()
-	StringFormatting()
-	Arrays()
-	SwitchCases()
-	afterMain()
-	makingMaps()
+	//call functions here
+	fmt.Println("variaticFunction Output : ",variaticFunction(1,2,3,4,5))
+	fmt.Println("num1 : ", num1, "\n Num2 : ", num2)
+	fmt.Println("closure output : " , doubleNum())
+	fmt.Println("closure output 2 : " , doubleNum())
+	//will fail to test exception
+	fmt.Println(safeDiv(3,0))
+	//calls the chosen defer function after main() is executed
+	// used to call cleanup functions like closing a file after opening
+	defer printTwo() 
+	printOne()
 
+	demPanic()	
 }
-//can declare functions after the main function
 
 func afterMain(){
 	fmt.Println("this is after the main function")
 
 }
+
 func makingMaps(){
 	//function about maps in go (or dictionaries as i call them)
 	presAge := make(map[string] int)
@@ -153,7 +158,75 @@ func makingMaps(){
 	// easilly print out the length of an array 
 	fmt.Println(len(presAge))
 	fmt.Println(presAge["George Washington"])
-
+	
 	fmt.Println(presAge)
 }
 
+func AddUp ( number []int ) int{
+	sum := 0
+
+	for _, val := range number{
+		sum += val
+	}
+	return sum
+}
+
+
+
+// can make function take 1 input and return x amount of values
+func addTwoValues(num int) (int, int){
+
+	return num+1, num+2 
+
+}
+
+
+func variaticFunction(args ...int) int {
+	//function with undefined amount of arguments
+	//guessing that these would be used for command line interfaces???
+	finalValue := 0 
+	for _, value := range args{
+		finalValue -= value
+	}
+	return finalValue
+}
+
+//recursive functions 
+
+func factorial(num int) int{
+
+	if num == 0 {
+		return 1
+	}
+	
+	return num * factorial(num - 1)
+}
+
+
+func printOne() { fmt.Println(1) } 
+func printTwo() { fmt.Println(2) } 
+
+
+
+func safeDiv(num1, num2 int) int {
+
+	defer func(){
+		//will catch any exceptions 
+		//recover allows the program to continue execution after encountering an error
+		fmt.Println(recover())
+
+	}()
+	solution := num1 / num2
+	return solution
+}
+
+
+func demPanic(){
+
+	//used to define error handling exceptions
+	defer func(){
+		fmt.Println(recover())
+	}()
+
+	panic("PANIC")
+}
