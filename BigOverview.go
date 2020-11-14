@@ -28,13 +28,6 @@ func split(sum int)(x, y int){
 	return //naked return here, only use for short functions as it hurts readability
 }
 
-func secondsplit(name string)(returnname string){
-	returnname = "ryan"
-	//function should just return "returnn
-
-	return //naked return here, only use for short functions as it hurts readability
-}
-
 func ConsAndLoops() {
 
 	//for loop in go
@@ -80,11 +73,16 @@ func main(){
 	var f float64 = math.Sqrt(float64(x*x + y*y))
 
 	var z uint = uint(f)//convert f to unsigned int
+
 	//unsigned int cannot be negative
+
 	//signed ints can be negative but has a lower positve range
+
 	fmt.Println(x, y, z)
 	fmt.Println("my favorite number is : ", rand.Intn(10))
+
 	//name is exported if it begins with a capital letter
+
 	fmt.Println(math.Pi)
 
 	var useradd = add(3, 5)//saving function out put to variable
