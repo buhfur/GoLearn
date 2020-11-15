@@ -230,3 +230,18 @@ func demPanic(){
 
 	panic("PANIC")
 }
+
+
+
+//structs allow you to make your own data types like int, char, bool etc or 
+//Non primitive types like Array String etc
+type Rectangle struct {
+
+	leftX float64
+	topY float64
+	height float64
+	width float64
+}
+
+
+
