@@ -41,6 +41,7 @@ func main(){
 
 	readString := string(stream)
 	fmt.Println(readString)
+	
 }
 
 
